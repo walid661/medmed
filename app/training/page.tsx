@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Dumbbell, Sparkles, Trophy } from 'lucide-react';
 import { JuicyCard, JuicyButton } from '@/components/ui/JuicyUI';
 
-export default function TrainingPage() {
+function TrainingContent() {
     const searchParams = useSearchParams();
     const moduleId = searchParams.get('module');
     const [loading, setLoading] = useState(false);
@@ -112,5 +112,22 @@ export default function TrainingPage() {
                 </JuicyCard>
             )}
         </div>
+    );
+}
+
+export default function TrainingPage() {
+    return (
+        <Suspense fallback={
+            <div className="p-4 md:p-8 max-w-5xl mx-auto">
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <div className="text-center">
+                        <div className="w-12 h-12 border-4 border-med-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p className="text-gray-600 font-bold">Chargement...</p>
+                    </div>
+                </div>
+            </div>
+        }>
+            <TrainingContent />
+        </Suspense>
     );
 }
