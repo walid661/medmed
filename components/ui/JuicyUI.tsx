@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
@@ -6,15 +8,15 @@ interface JuicyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
   fullWidth?: boolean;
 }
 
-export const JuicyButton: React.FC<JuicyButtonProps> = ({ 
-  children, 
-  variant = 'primary', 
-  fullWidth = false, 
+export const JuicyButton: React.FC<JuicyButtonProps> = ({
+  children,
+  variant = 'primary',
+  fullWidth = false,
   className = '',
-  ...props 
+  ...props
 }) => {
   const baseClasses = "font-extrabold uppercase tracking-wide py-3 px-6 rounded-2xl transition-all active:translate-y-1 active:border-b-0 flex items-center justify-center gap-2";
-  
+
   const variants = {
     primary: "bg-med-primary text-white border-b-4 border-med-primaryDark hover:bg-green-500",
     secondary: "bg-med-blue text-white border-b-4 border-med-blueDark hover:brightness-110",
@@ -23,7 +25,7 @@ export const JuicyButton: React.FC<JuicyButtonProps> = ({
   };
 
   return (
-    <button 
+    <button
       className={`${baseClasses} ${variants[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...props}
     >
@@ -39,20 +41,20 @@ interface ProgressBarProps {
   height?: string;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({ 
-  value, 
-  max = 100, 
-  color = 'bg-med-gold', 
-  height = 'h-4' 
+export const ProgressBar: React.FC<ProgressBarProps> = ({
+  value,
+  max = 100,
+  color = 'bg-med-gold',
+  height = 'h-4'
 }) => {
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
-  
+
   return (
     <div className={`w-full bg-gray-200 rounded-full ${height} overflow-hidden relative`}>
       {/* Light reflection effect top half */}
       <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/20 z-10 pointer-events-none"></div>
-      
-      <div 
+
+      <div
         className={`${color} h-full rounded-full transition-all duration-500 ease-out flex items-center justify-end pr-2`}
         style={{ width: `${percentage}%` }}
       >
@@ -65,10 +67,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 interface JuicyCardProps {
   children: React.ReactNode;
   className?: string;
-  colorBorder?: boolean;
 }
 
-export const JuicyCard: React.FC<JuicyCardProps> = ({ children, className = '', colorBorder = false }) => {
+export const JuicyCard: React.FC<JuicyCardProps> = ({ children, className = '' }) => {
   return (
     <div className={`bg-med-surface rounded-3xl p-6 border-2 border-med-border border-b-4 ${className}`}>
       {children}
